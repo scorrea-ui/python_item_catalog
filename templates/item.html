@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="catalog-container">
+
+  <main class="main-content">
+    <p class="mb-1">
+      <a href="{{ url_for('catalog.show_catalog') }}">Catalog</a> &rsaquo;
+      <a href="{{ url_for('catalog.show_category', category_name=category.name) }}">{{ category.name }}</a>
+    </p>
+
+    <h3 class="item-title">{{ item.name }}</h3>
+    <p class="item-description">{{ item.description or 'No description provided.' }}</p>
+
+    {% if is_owner %}
+      <div class="item-actions">
+        <a href="{{ url_for('catalog.edit_item', item_id=item.id) }}">Edit</a>
+        <a href="{{ url_for('catalog.delete_item', item_id=item.id) }}">Delete</a>
+      </div>
+    {% endif %}
+  </main>
+
+</div>
+{% endblock %}

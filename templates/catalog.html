@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="catalog-container">
+
+  <aside class="sidebar">
+    <h5>Categories</h5>
+    <ul>
+      {% for category in categories %}
+        <li>
+          <a href="{{ url_for('catalog.show_category', category_name=category.name) }}">
+            {{ category.name }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <main class="main-content">
+    {% if session.get('user_id') %}
+      <a href="{{ url_for('catalog.new_item') }}" class="btn btn-sm btn-primary mb-3">Add Item</a>
+    {% endif %}
+
+    <h5>Latest Items</h5>
+    {% if latest_items %}
+      <ul class="item-list">
+        {% for item in latest_items %}
+          <li>
+            <a href="{{ url_for('catalog.show_item', category_name=item.category.name, item_name=item.name) }}">
+              {{ item.name }}
+            </a>
+            <span class="item-meta">({{ item.category.name }})</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-muted">No items yet. Be the first to add one!</p>
+    {% endif %}
+  </main>
+
+</div>
+{% endblock %}

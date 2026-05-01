@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="catalog-container">
+  <main class="main-content">
+    <div class="form-card">
+      <h4>Edit Item</h4>
+      <form method="POST" action="{{ url_for('catalog.edit_item', item_id=item.id) }}">
+        <div class="mb-3">
+          <label for="name" class="form-label fw-semibold">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            value="{{ item.name }}"
+            required
+          >
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label fw-semibold">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            name="description"
+            rows="4"
+          >{{ item.description or '' }}</textarea>
+        </div>
+        <div class="mb-3">
+          <label for="category_id" class="form-label fw-semibold">Category</label>
+          <select class="form-select" id="category_id" name="category_id" required>
+            {% for category in categories %}
+              <option
+                value="{{ category.id }}"
+                {% if category.id == item.category_id %}selected{% endif %}
+              >{{ category.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ url_for('catalog.show_item', category_name=item.category.name, item_name=item.name) }}"
+           class="btn btn-secondary ms-2">Cancel</a>
+      </form>
+    </div>
+  </main>
+</div>
+{% endblock %}

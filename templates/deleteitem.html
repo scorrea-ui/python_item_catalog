@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="catalog-container">
+  <main class="main-content">
+    <div class="form-card">
+      <h4>Delete Item</h4>
+      <p>Are you sure you want to delete <strong>{{ item.name }}</strong>?</p>
+      <form method="POST" action="{{ url_for('catalog.delete_item', item_id=item.id) }}">
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{{ url_for('catalog.show_item', category_name=item.category.name, item_name=item.name) }}"
+           class="btn btn-secondary ms-2">Cancel</a>
+      </form>
+    </div>
+  </main>
+</div>
+{% endblock %}

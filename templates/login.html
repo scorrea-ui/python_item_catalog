@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="login-card">
+  <h3>Catalog App</h3>
+  <p class="text-muted mb-4">Sign in to add, edit, and delete catalog items.</p>
+  <a href="{{ url_for('auth.gconnect') }}" class="btn btn-google">
+    Sign in with Google
+  </a>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="catalog-container">
+  <main class="main-content">
+    <div class="form-card">
+      <h4>Add Item</h4>
+      <form method="POST" action="{{ url_for('catalog.new_item') }}">
+        <div class="mb-3">
+          <label for="name" class="form-label fw-semibold">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            required
+          >
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label fw-semibold">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            name="description"
+            rows="4"
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="category_id" class="form-label fw-semibold">Category</label>
+          <select class="form-select" id="category_id" name="category_id" required>
+            <option value="" disabled selected>Select a category</option>
+            {% for category in categories %}
+              <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ url_for('catalog.show_catalog') }}" class="btn btn-secondary ms-2">Cancel</a>
+      </form>
+    </div>
+  </main>
+</div>
+{% endblock %}

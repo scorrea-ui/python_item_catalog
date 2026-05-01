@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="catalog-container">
+
+  <aside class="sidebar">
+    <h5>Categories</h5>
+    <ul>
+      {% for cat in categories %}
+        <li>
+          <a href="{{ url_for('catalog.show_category', category_name=cat.name) }}">
+            {{ cat.name }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <main class="main-content">
+    <h5>{{ category.name }} Items ({{ items | length }} item{{ 's' if items | length != 1 }})</h5>
+    {% if items %}
+      <ul class="item-list">
+        {% for item in items %}
+          <li>
+            <a href="{{ url_for('catalog.show_item', category_name=category.name, item_name=item.name) }}">
+              {{ item.name }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-muted">No items in this category yet.</p>
+    {% endif %}
+  </main>
+
+</div>
+{% endblock %}
