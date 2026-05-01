@@ -1,5 +1,50 @@
 # Item Catalog
 
+## Server Details (Grader Info)
+
+- **IP Address:** 18.199.172.106
+- **SSH Port:** 2200
+- **URL:** [http://18.199.172.106.nip.io](http://18.199.172.106.nip.io)
+- **SSH Login:** `ssh -i grader_key -p 2200 grader@18.199.172.106`
+- **Grader private key:** submitted separately via the Udacity project submission form
+
+---
+
+## Software Installed
+
+- Python 3.12
+- Apache 2.4
+- mod_wsgi (libapache2-mod-wsgi-py3)
+- PostgreSQL 16
+- Git
+- Python packages: Flask 3.0, SQLAlchemy 2.0, psycopg 3, google-auth, google-auth-oauthlib, requests
+
+---
+
+## Configuration Summary
+
+- SSH port changed from 22 to 2200 (`/etc/ssh/sshd_config`)
+- Root login disabled; password authentication disabled — key-based SSH only
+- UFW firewall configured: allow 2200/tcp, 80/tcp, 123/udp; deny all else
+- Timezone set to UTC
+- PostgreSQL user `catalog` and database `catalog` created with limited permissions
+- Apache virtual host configured to serve the Flask app via mod_wsgi
+- `.git` directory blocked from public access via Apache config
+
+---
+
+## Third-Party Resources
+
+- [Flask documentation](https://flask.palletsprojects.com)
+- [SQLAlchemy documentation](https://docs.sqlalchemy.org)
+- [Google OAuth 2.0 documentation](https://developers.google.com/identity/protocols/oauth2)
+- [mod_wsgi documentation](https://modwsgi.readthedocs.io)
+- [nip.io](https://nip.io) — wildcard DNS for IP-based domains
+- [Ubuntu UFW documentation](https://help.ubuntu.com/community/UFW)
+- [Amazon Lightsail documentation](https://lightsail.aws.amazon.com/ls/docs)
+
+---
+
 A full-stack web application built with Flask that lets visitors browse a catalog
 of sporting-goods items organised by category. Authenticated users — who sign in
 via Google OAuth 2.0 — can add new items and edit or delete items they own.
